@@ -13,7 +13,8 @@ counter_chance = 0.5
 player_defense = False
 enemy_defense = False
 #player turn
-enemy_damage = 100
+enemy_damage = 0
+player_defense = False
 while player_hp > 0 and enemy_hp > 0:
     print (f'------Turn {turn}------')
     print(health_bar(player_hp), player_hp)
@@ -35,14 +36,15 @@ while player_hp > 0 and enemy_hp > 0:
     elif move == "2":
         enemy_hp -= 10
         print ('Enemy HIT!')
-    else:
-        player_defense = True
-        player_hp = (max(0, enemy_damage - 3))
-        player_hp -= enemy_damage
-        print('You defended yourself')
+        while:
+           move = "3"
+           player_defense = True
+           player_hp = (max(0, enemy_damage - 3))
+           player_hp -= enemy_damage
+           print('You defended yourself')
 else:
  print('Turn missed')
- if random.random() < counter_chance:
+if random.random() < counter_chance:
             random.randint (1, 5)
             enemy_damage -= player_damage
             print ('You counterattack!') #player turn ends
