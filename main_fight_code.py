@@ -9,47 +9,45 @@ import random
 player_hp = 100
 enemy_hp = 100
 turn = 1
-counter_chance = 0.5
-player_defense = False
-enemy_defense = False
+crit: bool
 #player turn
-enemy_damage = 0
-player_defense = False
 while player_hp > 0 and enemy_hp > 0:
     print (f'------Turn {turn}------')
     print(health_bar(player_hp), player_hp)
     print(health_bar(enemy_hp), enemy_hp)
+    player_defense = False
+    counter_chance = 0.5
     move = input('Choose 1-Slash, 2-Fireball or 3-Defense')
     player_damage = 0
     if random.random() < 0.15: #15% chance to miss
         player_damage = 0
         print('You missed!')
-        if random.random() < 0.15:
-            print ('Critical HIT!')
+        enemy_damage = random.random() < 0.15
+        if crit:
             player_damage *= 2
+            print ('Critical HIT!')
         elif random.random() < 0.85:
             print ('No damage dealt')
-        move = input('Choose 1-Slash or 2-Fireball')
     if move == "1":
         enemy_hp -= 5
         print ('Enemy HIT!')
-    elif move == "2":
+    if move == "2":
         enemy_hp -= 10
         print ('Enemy HIT!')
-        while:
-           move = "3"
-           player_defense = True
-           player_hp = (max(0, enemy_damage - 3))
-           player_hp -= enemy_damage
-           print('You defended yourself')
-else:
- print('Turn missed')
-if random.random() < counter_chance:
+    if move == "3":           
+        player_defense = True
+        enemy_damage = random.randint (4, 10)
+        player_hp = (max(0, enemy_damage - 3))
+        print('You defended yourself')
+        if random.random() < counter_chance:
             random.randint (1, 5)
             enemy_damage -= player_damage
-            print ('You counterattack!') #player turn ends
+            print ('You counterattack!')
+else:
+ print('Turn missed') #player turn ends
     #enemy turn
 if enemy_hp > 0:
+         enemy_defense = False
          enemy_damage = 0
          if random.random() < 0.2:
             enemy_damage = 0
