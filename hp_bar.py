@@ -1,4 +1,4 @@
-import random
+import random #print (hello world)
 
 # --- 1. Variables ---
 player_hp = 100
