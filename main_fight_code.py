@@ -30,13 +30,12 @@ while player_hp > 0 and enemy_hp > 0:
         if random.random() < crit_chance:
             print('Critical HIT!')
             player_damage *= 2
-        
-    elif move == "3":           
-        player_defense = True
-        enemy_damage = random.randint (4, 10)
-        player_hp = (max(0, player_hp - 3))
-        print('You defended yourself')
-        player_hp -= enemy_damage
+        elif move == "3":           
+            player_defense = True
+            enemy_damage = random.randint (4, 10)
+            player_hp = (max(0, player_hp - 3))
+            print('You defended yourself')
+            player_hp -= enemy_damage
     else:
         player_damage = 0
         print ('You missed')
