@@ -26,6 +26,11 @@ while player_hp > 0 and enemy_hp > 0:
         player_damage = 10
         enemy_hp -= player_damage
         print ('Enemy HIT!')
+        crit_chance = 0.15
+        if random.random() < crit_chance:
+            print('Critical HIT!')
+            player_damage *= 2
+        
     elif move == "3":           
         player_defense = True
         enemy_damage = random.randint (4, 10)
