@@ -47,22 +47,17 @@ while player_hp > 0 and enemy_hp > 0:
     else:
      player_damage = 0
      print ('You missed')
-     random.randint (1, 5)
-    if random.randint (1, 5) < counter_chance:
-      print ('You counterattack!')
-else:
- print('Turn missed')
+    if enemy_hp <= 0:
+     break
+    else:
+      print('Turn missed')
       #player turn ends
     #enemy turn
- if enemy_hp > 0:
-     print(health_bar(player_hp), player_hp)
-     print(health_bar(enemy_hp), enemy_hp)
-     enemy_damage = random.randint (1, 10)
-     enemy_defense = False
- else:
-    enemy_damage = random.randint (1, 10)
+    
+    enemy_damage = random.randint (5, 15)
+    enemy_defense = False
     player_hp -= enemy_damage
-    print (f'You are HIT!')
+    print (f'You are atack {enemy_damage} !')
     if random.random() < 0.12:
         print ('Enemy Critical Hit!')
         enemy_damage *= 2
