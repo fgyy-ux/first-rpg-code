@@ -1,5 +1,6 @@
 def health_bar(hp, total = 100, chars = ("#", "-"), bar_length = 20):
     total = max(1, total)
+    hp = max(0, min(hp, total))
     filled_length = int(round(hp / total * bar_length))
     empty_length = int(bar_length - hp / total * bar_length)
     filled_bar = chars[0] * filled_length
@@ -7,9 +8,10 @@ def health_bar(hp, total = 100, chars = ("#", "-"), bar_length = 20):
     return f"[{filled_bar}{empty_bar}]"
 import random
 player_hp = 100
+player_max_hp = 100
 enemy_hp = 100
 turn = 1
-counter_chance = 0
+counter_chance = 80
 player_defense = False
 emeny_defense = False
 #player turn
@@ -40,8 +42,8 @@ while player_hp > 0 and enemy_hp > 0:
         heal = random.randint(5, 10)
         player_hp += heal
         if player_hp > player_hp:
-        player_hp = player_hp
-        print(heal{heal}, HP added)
+           player_hp = player_max_hp
+        print (f'You heal yourself {heal}, HP added')
     else:
      player_damage = 0
      print ('You missed')
