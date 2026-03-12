@@ -40,8 +40,8 @@ while player_hp > 0 and enemy_hp > 0:
         heal = random.randint(5, 10)
         player_hp += heal
         if player_hp > player_hp:
-        player_hp = player_hp
-        print(heal{heal}, HP added)
+            player_hp = min(player_hp, 100)
+            print(f"You healed for {heal} HP!")
     else:
      player_damage = 0
      print ('You missed')
