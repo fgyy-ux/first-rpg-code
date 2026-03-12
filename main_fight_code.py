@@ -17,7 +17,7 @@ while player_hp > 0 and enemy_hp > 0:
     print (f'------Turn {turn}------')
     print(health_bar(player_hp), player_hp)
     print(health_bar(enemy_hp), enemy_hp)
-    move = input('Choose 1-Slash, 2-Fireball or 3-Defense: ')
+    move = input('Choose 1-Slash, 2-Fireball, 3-Defense or 4-Heal: ')
     if move == "1":
         player_damage = 5
         enemy_hp -= player_damage
@@ -36,10 +36,16 @@ while player_hp > 0 and enemy_hp > 0:
             player_hp = (max(0, player_hp - 3))
             print('You defended yourself')
             player_hp -= enemy_damage
+    elif move == "4":
+        heal = random.randint(5, 10)
+        player_hp += heal
+        if player_hp > player_hp:
+        player_hp = player_hp
+        print(heal{heal}, HP added)
     else:
-        player_damage = 0
-        print ('You missed')
-    random.randint (1, 5)
+     player_damage = 0
+     print ('You missed')
+     random.randint (1, 5)
     if random.randint (1, 5) < counter_chance:
       print ('You counterattack!')
 else:
