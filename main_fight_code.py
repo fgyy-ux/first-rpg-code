@@ -11,7 +11,7 @@ player_hp = 100
 player_max_hp = 100
 enemy_hp = 100
 turn = 1
-counter_chance = 80
+counter_chance = 70
 player_defense = False
 emeny_defense = False
 #player turn
@@ -23,16 +23,16 @@ while player_hp > 0 and enemy_hp > 0:
     if move == "1":
         player_damage = 5
         enemy_hp -= player_damage
-        print ('Enemy HIT!')
+        print (f'Enemy HIT {player_damage} Damage!')
     elif move == "2":
         player_damage = 10
         enemy_hp -= player_damage
-        print ('Enemy HIT!')
+        print (f'Enemy HIT {player_damage} Damage!')
         crit_chance = 0.15
         if random.random() < crit_chance:
-            print('Critical HIT!')
+            print(f'Critical HIT {player_damage} Damage!')
             player_damage *= 2
-        elif move == "3":           
+    elif move == "3":           
             player_defense = True
             enemy_damage = random.randint (4, 10)
             player_hp = (max(0, player_hp - 3))
@@ -41,7 +41,7 @@ while player_hp > 0 and enemy_hp > 0:
     elif move == "4":
         heal = random.randint(5, 10)
         player_hp += heal
-        if player_hp > player_hp:
+        if player_hp > player_max_hp:
            player_hp = player_max_hp
         print (f'You heal yourself {heal}, HP added')
     else:
@@ -49,12 +49,10 @@ while player_hp > 0 and enemy_hp > 0:
      print ('You missed')
     if enemy_hp <= 0:
      break
-    else:
-      print('Turn missed')
       #player turn ends
-    #enemy turn
+      #enemy turn
     
-    enemy_damage = random.randint (5, 15)
+    enemy_damage = random.randint (10, 15)
     enemy_defense = False
     player_hp -= enemy_damage
     print (f'You are atack {enemy_damage} !')
