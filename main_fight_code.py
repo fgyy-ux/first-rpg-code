@@ -51,7 +51,6 @@ while player_hp > 0 and enemy_hp > 0:
         else:
             heal = random.randint (15, 20)
             player_hp = player_max_hp
-            player_hp = player_max_hp
             player_hp += heal
             print(f'You heal for {heal} HP!')
             heal_cooldown = 2
