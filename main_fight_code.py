@@ -65,7 +65,7 @@ while player_hp > 0 and enemy_hp > 0:
     enemy_defense = False
     player_hp -= enemy_damage
     print (f'You are HIT {enemy_damage}!')
-    if random.random() < 0.12:
+    if random.random() < 1:
         print (f'Enemy Critical Hit {enemy_damage}!')
         enemy_damage *= 2
         if random.random() < counter_chance:
@@ -74,6 +74,7 @@ while player_hp > 0 and enemy_hp > 0:
             enemy_defense = True
             enemy_hp = (max(0, enemy_hp - 3))
             print('Enemy has defended')
+    player_hp -= enemy_damage
             #double damage on critical hit
                  #enemy turn ends
     #print turn number 
