@@ -11,7 +11,7 @@ player_hp = 100
 player_max_hp = 100
 enemy_hp = 100
 turn = 1
-counter_chance = 70
+counter_chance = 0
 player_defense = False
 emeny_defense = False
 heal_cooldown = 0
@@ -81,8 +81,7 @@ while player_hp > 0 and enemy_hp > 0:
         fireball_cooldown -= 1
     if heal_cooldown > 0:
         heal_cooldown -= 1
-    print ('Turn:', turn)
-    print ('------------------------------')
+    print()
     turn += 1
 #determine winner    
 if player_hp <= 0:
