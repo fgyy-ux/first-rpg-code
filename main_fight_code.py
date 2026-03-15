@@ -11,9 +11,10 @@ player_hp = 100
 player_max_hp = 100
 enemy_hp = 100
 turn = 1
-counter_chance = 0
+counter_chance = 70
 player_defense = False
 emeny_defense = False
+enemey_crit_atack=False
 heal_cooldown = 0
 fireball_cooldown = 0
 #player turn
@@ -64,9 +65,8 @@ while player_hp > 0 and enemy_hp > 0:
     enemy_damage = random.randint (10, 15)
     enemy_defense = False
     player_hp -= enemy_damage
-    print (f'You are HIT {enemy_damage}!')
-    if random.random() < 1:
-        print (f'Enemy Critical Hit {enemy_damage}!')
+    if random.random() < 0.12:
+        enemey_crit_atack=True
         enemy_damage *= 2
         if random.random() < counter_chance:
             random.randint (1, 5)
@@ -75,6 +75,11 @@ while player_hp > 0 and enemy_hp > 0:
             enemy_hp = (max(0, enemy_hp - 3))
             print('Enemy has defended')
     player_hp -= enemy_damage
+    if enemey_crit_atack == False:
+        print (f'You are HIT {enemy_damage}!')
+    if enemey_crit_atack == True:
+        print (f'Enemy Critical Hit {enemy_damage}!')
+    enemey_crit_atack=False
             #double damage on critical hit
                  #enemy turn ends
     #print turn number 
