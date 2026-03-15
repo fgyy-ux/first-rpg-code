@@ -23,14 +23,14 @@ while player_hp > 0 and enemy_hp > 0:
     print(health_bar(enemy_hp), enemy_hp)
     move = input('Choose 1-Slash, 2-Fireball, 3-Defense or 4-Heal: ')
     if move == "1":
-        player_damage = 5
+        player_damage = 10
         enemy_hp -= player_damage
         print (f'Enemy Got HIT by {player_damage} HP!')
     elif move == "2":
         if fireball_cooldown > 0:
             print('Fireball is on Cooldown!')
         else:
-            player_damage = 5
+            player_damage = 25
             enemy_hp -= player_damage
             print(f'Enemy Got HIT by {player_damage} HP!')
             fireball_cooldown = 2
@@ -48,7 +48,7 @@ while player_hp > 0 and enemy_hp > 0:
         if heal_cooldown > 0:
             print('Healing is on Cooldown!')
         else:
-            heal = random.randint (5, 10)
+            heal = random.randint (5, 15)
             player_hp += heal
             if player_hp > player_max_hp:
                 player_hp = player_max_hp
@@ -64,9 +64,9 @@ while player_hp > 0 and enemy_hp > 0:
     enemy_damage = random.randint (10, 15)
     enemy_defense = False
     player_hp -= enemy_damage
-    print ('You are HIT!')
+    print (f'You are HIT {enemy_damage}!')
     if random.random() < 0.12:
-        print ('Enemy Critical Hit!')
+        print (f'Enemy Critical Hit {enemy_damage}!')
         enemy_damage *= 2
         if random.random() < counter_chance:
             random.randint (1, 5)
@@ -81,9 +81,9 @@ while player_hp > 0 and enemy_hp > 0:
         fireball_cooldown -= 1
     if heal_cooldown > 0:
         heal_cooldown -= 1
-print ('Turn:', turn)
-print ('------------------------------')
-turn += 1
+    print ('Turn:', turn)
+    print ('------------------------------')
+    turn += 1
 #determine winner    
 if player_hp <= 0:
     print('You lose!')
