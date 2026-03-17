@@ -79,6 +79,9 @@ while player_hp > 0 and enemy_hp > 0:
         print (f'Enemy Crittical Hit {enemy_damage}!')
         enemy_crit_attack=False
     player_hp -= enemy_damage
+    if enemey_crit_atack == True:
+        print (f'Enemy Critical Hit {enemy_damage}!')
+    enemey_crit_atack = False
             #double damage on critical hit
                  #enemy turn ends
     #print turn number 
