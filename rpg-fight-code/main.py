@@ -1,3 +1,6 @@
+import random
+from leveling_system import player_xp
+from leveling_system import check_xp
 def health_bar(hp, total = 100, chars = ("#", "-"), bar_length = 20):
     total = max(1, total)
     hp = max(0, min(hp, total))
@@ -6,7 +9,7 @@ def health_bar(hp, total = 100, chars = ("#", "-"), bar_length = 20):
     filled_bar = chars[0] * filled_length
     empty_bar = chars[1] * empty_length
     return f"[{filled_bar}{empty_bar}]"
-import random
+
 player_hp = 100
 player_max_hp = 100
 enemy_hp = 100
@@ -14,9 +17,10 @@ turn = 1
 counter_chance = 70
 player_defense = False
 emeny_defense = False
-enemey_crit_atack=False
+enemy_crit_attack=False
 heal_cooldown = 0
 fireball_cooldown = 0
+
 #player turn
 while player_hp > 0 and enemy_hp > 0:
     print (f'------Turn {turn}------')
@@ -59,6 +63,7 @@ while player_hp > 0 and enemy_hp > 0:
      print ('You missed')
     if enemy_hp <= 0:
      break
+
       #player turn ends
       #enemy turn
     enemy_damage = random.randint (10, 15)
@@ -74,11 +79,12 @@ while player_hp > 0 and enemy_hp > 0:
             enemy_hp = (max(0, enemy_hp - 3))
             print('Enemy has defended')
     player_hp -= enemy_damage
-    if enemey_crit_atack == False:
+    if enemy_crit_attack == False:
         print (f'You are HIT {enemy_damage}!')
-    if enemey_crit_atack == True:
+    if enemy_crit_attack == True:
         print (f'Enemy Critical Hit {enemy_damage}!')
-    enemey_crit_atack = False
+    enemy_crit_atack = False
+
             #double damage on critical hit
                  #enemy turn ends
     #print turn number 
@@ -88,8 +94,18 @@ while player_hp > 0 and enemy_hp > 0:
         heal_cooldown -= 1
     print()
     turn += 1
+
 #determine winner    
 if player_hp <= 0:
     print('You lose!')
 elif enemy_hp <= 0:
     print('You win!')
+    player_xp = 0
+
+    #gain xp
+    def gain_xp():
+        global player_xp
+        player_xp += 5
+        print(f'XP Gained: {player_xp}')
+
+    gain_xp()
