@@ -1,5 +1,8 @@
 import random
 from leveling_system import player_xp
+from leveling_system import player_level
+from leveling_system import check_xp
+check_xp(player_xp, player_level)
 def health_bar(hp, total = 100, chars = ("#", "-"), bar_length = 20):
     total = max(1, total)
     hp = max(0, min(hp, total))
@@ -108,3 +111,11 @@ elif enemy_hp <= 0:
         print(f'XP Gained: {player_xp}')
 
     gain_xp()
+
+    def check_xp(player_xp, player_level):
+        needed_xp = player_level * 10
+        if needed_xp >= player_level:
+            player_level += 1
+            player_xp -= needed_xp
+            print(f'You leveled up! You are now level {player_level}')
+            return player_xp, player_level
