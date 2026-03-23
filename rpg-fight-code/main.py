@@ -1,6 +1,5 @@
 import random
 from leveling_system import player_xp
-from leveling_system import check_xp
 def health_bar(hp, total = 100, chars = ("#", "-"), bar_length = 20):
     total = max(1, total)
     hp = max(0, min(hp, total))
@@ -45,17 +44,12 @@ while player_hp > 0 and enemy_hp > 0:
                 player_damage *= 2
     elif move == "3":           
             player_defense = True
-            enemy_damage = random.randint (4, 10)
-            player_hp = (max(0, player_hp - 3))
-            print('You defended yourself')
-            player_hp -= enemy_damage
     elif move == "4":
         if heal_cooldown > 0:
             print('Healing is on Cooldown!')
         else:
             heal = random.randint (15, 20)
-            player_hp = player_max_hp
-            player_hp += heal
+            player_hp = min(player_max_hp, player_hp + heal) 
             print(f'You heal for {heal} HP!')
             heal_cooldown = 2
     else:
@@ -68,7 +62,6 @@ while player_hp > 0 and enemy_hp > 0:
       #enemy turn
     enemy_damage = random.randint (10, 15)
     enemy_defense = False
-    player_hp -= enemy_damage
     if random.random() < 0.12:
         enemey_crit_atack=True
         enemy_damage *= 2
@@ -78,13 +71,18 @@ while player_hp > 0 and enemy_hp > 0:
             enemy_defense = True
             enemy_hp = (max(0, enemy_hp - 3))
             print('Enemy has defended')
-    player_hp -= enemy_damage
+    if player_defense == True :
+     enemy_damage /= 2
+     enemy_damage = round (enemy_damage)
+     int (player_hp)
+     player_defense = False
+     print('You defended yourself')  
     if enemy_crit_attack == False:
         print (f'You are HIT {enemy_damage}!')
     if enemy_crit_attack == True:
-        print (f'Enemy Critical Hit {enemy_damage}!')
-    enemy_crit_atack = False
-
+        print (f'Enemy Crittical Hit {enemy_damage}!')
+        enemy_crit_attack=False
+    player_hp -= enemy_damage
             #double damage on critical hit
                  #enemy turn ends
     #print turn number 
@@ -100,12 +98,6 @@ if player_hp <= 0:
     print('You lose!')
 elif enemy_hp <= 0:
     print('You win!')
-    player_xp = 0
 
-    #gain xp
-    def gain_xp():
-        global player_xp
-        player_xp += 5
-        print(f'XP Gained: {player_xp}')
-
-    gain_xp()
+    def check_xp ():
+        
