@@ -82,7 +82,8 @@ while player_hp > 0 and enemy_hp > 0:
     if enemy_crit_attack == True:
         print (f'Enemy Crittical Hit {enemy_damage}!')
         enemy_crit_attack=False
-    player_hp -= enemy_damage
+        player_hp -= enemy_damage
+
             #double damage on critical hit
                  #enemy turn ends
     #print turn number 
@@ -98,6 +99,12 @@ if player_hp <= 0:
     print('You lose!')
 elif enemy_hp <= 0:
     print('You win!')
+    player_xp = 0
 
-    def check_xp ():
-        
+    #gain xp
+    def gain_xp():
+        global player_xp
+        player_xp += 5
+        print(f'XP Gained: {player_xp}')
+
+    gain_xp()
