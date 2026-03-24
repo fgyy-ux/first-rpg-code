@@ -109,14 +109,10 @@ elif enemy_hp <= 0:
 
     #gain xp
     leveling_system.player_xp += 5
-    leveling_system.player_level, player_xp = leveling_system.check_xp(leveling_system.player_level, leveling_system.player_xp)
+    leveling_system.player_level, leveling_system.player_xp = leveling_system.check_xp(leveling_system.player_level, leveling_system.player_xp)
 
-    #gain level points
+     #gain level points
     level_points += leveling_system.player_level 
     level_points -= player_level_before_the_fight
     player_level_before_the_fight = leveling_system.player_level
     print(f'You have {level_points} level points')
-
-    #allocation of level points
-    move = input('Choose 1-Slash damage, 2-Firebakk damage, 3-? or 4-Heal effectiveness: ')
-    if move == "1":
