@@ -1,8 +1,5 @@
 import random
-from leveling_system import player_xp
-from leveling_system import player_level
-from leveling_system import check_xp
-check_xp(player_xp, player_level)
+import leveling_system
 def health_bar(hp, total = 100, chars = ("#", "-"), bar_length = 20):
     total = max(1, total)
     hp = max(0, min(hp, total))
@@ -18,8 +15,8 @@ enemy_hp = 100
 turn = 1
 counter_chance = 70
 player_defense = False
-emeny_defense = False
-enemy_crit_attack=False
+enemy_defense = False
+enemy_crit_attack = False
 heal_cooldown = 0
 fireball_cooldown = 0
 
@@ -66,7 +63,7 @@ while player_hp > 0 and enemy_hp > 0:
     enemy_damage = random.randint (10, 15)
     enemy_defense = False
     if random.random() < 0.12:
-        enemey_crit_atack=True
+        enemey_crit_atack = True
         enemy_damage *= 2
         if random.random() < counter_chance:
             random.randint (1, 5)
@@ -74,17 +71,16 @@ while player_hp > 0 and enemy_hp > 0:
             enemy_defense = True
             enemy_hp = (max(0, enemy_hp - 3))
             print('Enemy has defended')
-    if player_defense == True :
+    if player_defense == True:
      enemy_damage /= 2
      enemy_damage = round (enemy_damage)
-     int (player_hp)
-     player_defense = False
-     print('You defended yourself')  
+    print('You defended yourself')  
     if enemy_crit_attack == False:
+        player_hp -= enemy_damage
         print (f'You are HIT {enemy_damage}!')
     if enemy_crit_attack == True:
-        print (f'Enemy Crittical Hit {enemy_damage}!')
-        enemy_crit_attack=False
+        print (f'Enemy Critical Hit {enemy_damage}!')
+        enemy_crit_attack = False
         player_hp -= enemy_damage
 
             #double damage on critical hit
@@ -105,11 +101,5 @@ elif enemy_hp <= 0:
     player_xp = 0
 
     #gain xp
-    def gain_xp():
-        global player_xp
-        player_xp += 5
-        player_level = 1
-        player_xp, player_level = check_xp(player_xp, player_level)
-        print(f'XP Gained: {player_xp}')
-
-    gain_xp()
+    leveling_system.player_xp += 5
+    leveling_system.player_level, player_xp = leveling_system.check_xp(leveling_system.player_level, leveling_system.player_xp)
