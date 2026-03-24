@@ -102,4 +102,4 @@ elif enemy_hp <= 0:
 
     #gain xp
     leveling_system.player_xp += 5
-    leveling_system.player_level, player_xp = leveling_system.check_xp(leveling_system.player_level, leveling_system.player_xp)
+    leveling_system.player_level, leveling_system.player_xp = leveling_system.check_xp(leveling_system.player_level, leveling_system.player_xp)
