@@ -108,14 +108,8 @@ elif enemy_hp <= 0:
     def gain_xp():
         global player_xp
         player_xp += 5
+        player_level = 1
+        player_xp, player_level = check_xp(player_xp, player_level)
         print(f'XP Gained: {player_xp}')
 
     gain_xp()
-
-    def check_xp(player_xp, player_level):
-        needed_xp = player_level * 10
-        if needed_xp >= player_level:
-            player_level += 1
-            player_xp -= needed_xp
-            print(f'You leveled up! You are now level {player_level}')
-            return player_xp, player_level
