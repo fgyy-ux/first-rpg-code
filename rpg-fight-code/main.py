@@ -19,6 +19,12 @@ enemy_defense = False
 enemy_crit_attack = False
 heal_cooldown = 0
 fireball_cooldown = 0
+player_damage = 10
+fireball_damage = 25
+heal_random = 0
+enemy_damage_random = 0
+player_level_before_the_fight = 1
+level_points = 1
 
 #player turn
 while player_hp > 0 and enemy_hp > 0:
@@ -27,21 +33,19 @@ while player_hp > 0 and enemy_hp > 0:
     print(health_bar(enemy_hp), enemy_hp)
     move = input('Choose 1-Slash, 2-Fireball, 3-Defense or 4-Heal: ')
     if move == "1":
-        player_damage = 10
         enemy_hp -= player_damage
         print (f'Enemy Got HIT by {player_damage} HP!')
     elif move == "2":
         if fireball_cooldown > 0:
             print('Fireball is on Cooldown!')
         else:
-            player_damage = 25
-            enemy_hp -= player_damage
-            print(f'Enemy Got HIT by {player_damage} HP!')
+            enemy_hp -= fireball_damage
+            print(f'Enemy Got HIT by {fireball_damage} HP!')
             fireball_cooldown = 2
             crit_chance = 0.15
             if random.random() < crit_chance:
-                print(f'Critical HIT {player_damage} Damage!')
-                player_damage *= 2
+                print(f'Critical HIT {fireball_damage} Damage!')
+                fireball_damage *= 2
     elif move == "3":           
             player_defense = True
     elif move == "4":
@@ -49,6 +53,7 @@ while player_hp > 0 and enemy_hp > 0:
             print('Healing is on Cooldown!')
         else:
             heal = random.randint (15, 20)
+            heal += heal_random
             player_hp = min(player_max_hp, player_hp + heal) 
             print(f'You heal for {heal} HP!')
             heal_cooldown = 2
@@ -61,6 +66,7 @@ while player_hp > 0 and enemy_hp > 0:
       #player turn ends
       #enemy turn
     enemy_damage = random.randint (10, 15)
+    enemy_damage += enemy_damage_random
     enemy_defense = False
     if random.random() < 0.12:
         enemey_crit_atack = True
@@ -72,9 +78,10 @@ while player_hp > 0 and enemy_hp > 0:
             enemy_hp = (max(0, enemy_hp - 3))
             print('Enemy has defended')
     if player_defense == True:
-     enemy_damage /= 2
-     enemy_damage = round (enemy_damage)
-    print('You defended yourself')  
+        enemy_damage /= 2
+        enemy_damage = round (enemy_damage)
+        print('You defended yourself')  
+        player_defense = False
     if enemy_crit_attack == False:
         player_hp -= enemy_damage
         print (f'You are HIT {enemy_damage}!')
@@ -103,3 +110,13 @@ elif enemy_hp <= 0:
     #gain xp
     leveling_system.player_xp += 5
     leveling_system.player_level, player_xp = leveling_system.check_xp(leveling_system.player_level, leveling_system.player_xp)
+
+    #gain level points
+    level_points += leveling_system.player_level 
+    level_points -= player_level_before_the_fight
+    player_level_before_the_fight = leveling_system.player_level
+    print(f'You have {level_points} level points')
+
+    #allocation of level points
+    move = input('Choose 1-Slash damage, 2-Firebakk damage, 3-? or 4-Heal effectiveness: ')
+    if move == "1":
