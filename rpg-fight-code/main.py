@@ -24,7 +24,7 @@ fireball_damage = 25
 heal_random = 0
 enemy_damage_random = 0
 player_level_before_the_fight = 1
-level_points = 1
+ability_points = 0
 
 #player turn
 while player_hp > 0 and enemy_hp > 0:
@@ -111,8 +111,10 @@ elif enemy_hp <= 0:
     leveling_system.player_xp += 5
     leveling_system.player_level, leveling_system.player_xp = leveling_system.check_xp(leveling_system.player_level, leveling_system.player_xp)
 
-     #gain level points
-    level_points += leveling_system.player_level 
-    level_points -= player_level_before_the_fight
-    player_level_before_the_fight = leveling_system.player_level
-    print(f'You have {level_points} level points')
+     #gain ability points
+    if leveling_system.player_xp >= leveling_system.player_level:
+        ability_points += leveling_system.player_level + 2
+        #move - imput, player chooses stats to spend ability points on 
+        ability_points -= player_level_before_the_fight
+        player_level_before_the_fight = leveling_system.player_level
+        print(f'You have {ability_points} level points')
