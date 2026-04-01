@@ -1,5 +1,8 @@
 import random
-import leveling_system
+from player import Player
+from leveling_system import check_xp
+from ability import end_of_battle
+player = Player()
 def health_bar(hp, total = 100, chars = ("#", "-"), bar_length = 20):
     total = max(1, total)
     hp = max(0, min(hp, total))
@@ -9,8 +12,7 @@ def health_bar(hp, total = 100, chars = ("#", "-"), bar_length = 20):
     empty_bar = chars[1] * empty_length
     return f"[{filled_bar}{empty_bar}]"
 
-player_hp = 100
-player_max_hp = 100
+player.hp = 100
 enemy_hp = 100
 turn = 1
 counter_chance = 70
@@ -23,13 +25,11 @@ player_damage = 10
 fireball_damage = 25
 heal_random = 0
 enemy_damage_random = 0
-player_level_before_the_fight = 1
-ability_points = 0
 
 #player turn
-while player_hp > 0 and enemy_hp > 0:
+while player.hp > 0 and enemy_hp > 0:
     print (f'------Turn {turn}------')
-    print(health_bar(player_hp), player_hp)
+    print(health_bar(player.hp), player.hp)
     print(health_bar(enemy_hp), enemy_hp)
     move = input('Choose 1-Slash, 2-Fireball, 3-Defense or 4-Heal: ')
     if move == "1":
@@ -45,7 +45,7 @@ while player_hp > 0 and enemy_hp > 0:
             crit_chance = 0.15
             if random.random() < crit_chance:
                 print(f'Critical HIT {fireball_damage} Damage!')
-                fireball_damage *= 2
+                player_damage *= 2
     elif move == "3":           
             player_defense = True
     elif move == "4":
@@ -54,7 +54,7 @@ while player_hp > 0 and enemy_hp > 0:
         else:
             heal = random.randint (15, 20)
             heal += heal_random
-            player_hp = min(player_max_hp, player_hp + heal) 
+            player.hp = min(player.max_hp, player.hp + heal) 
             print(f'You heal for {heal} HP!')
             heal_cooldown = 2
     else:
@@ -69,7 +69,7 @@ while player_hp > 0 and enemy_hp > 0:
     enemy_damage += enemy_damage_random
     enemy_defense = False
     if random.random() < 0.12:
-        enemey_crit_atack = True
+        enemy_crit_attack = True
         enemy_damage *= 2
         if random.random() < counter_chance:
             random.randint (1, 5)
@@ -83,12 +83,12 @@ while player_hp > 0 and enemy_hp > 0:
         print('You defended yourself')  
         player_defense = False
     if enemy_crit_attack == False:
-        player_hp -= enemy_damage
+        player.hp -= enemy_damage
         print (f'You are HIT {enemy_damage}!')
     if enemy_crit_attack == True:
         print (f'Enemy Critical Hit {enemy_damage}!')
         enemy_crit_attack = False
-        player_hp -= enemy_damage
+        player.hp -= enemy_damage
 
             #double damage on critical hit
                  #enemy turn ends
@@ -101,20 +101,11 @@ while player_hp > 0 and enemy_hp > 0:
     turn += 1
 
 #determine winner    
-if player_hp <= 0:
+if player.hp <= 0:
     print('You lose!')
 elif enemy_hp <= 0:
     print('You win!')
-    player_xp = 0
 
-    #gain xp
-    leveling_system.player_xp += 5
-    leveling_system.player_level, leveling_system.player_xp = leveling_system.check_xp(leveling_system.player_level, leveling_system.player_xp)
-
-     #gain ability points
-    if leveling_system.player_xp >= leveling_system.player_level:
-        ability_points += leveling_system.player_level + 2
-        #move - imput, player chooses stats to spend ability points on 
-        ability_points -= player_level_before_the_fight
-        player_level_before_the_fight = leveling_system.player_level
-        print(f'You have {ability_points} level points')
+    player.xp += 5
+    leveled = check_xp(player)
+    end_of_battle(player)
