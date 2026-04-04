@@ -1,8 +1,10 @@
 import random
 from player import Player
+from enemy import Enemy
 from leveling_system import check_xp
 from ability import end_of_battle
 player = Player()
+enemy = Enemy()
 def health_bar(hp, total = 100, chars = ("#", "-"), bar_length = 20):
     total = max(1, total)
     hp = max(0, min(hp, total))
