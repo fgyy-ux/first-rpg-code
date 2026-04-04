@@ -7,3 +7,5 @@ class Enemy:
         Enemy.fix_damage = 0
         Enemy.protection_effectiveness = 2
         Enemy.critical_impact_multiplier = 2
+        Enemy.crit_attack = False
+        Enemy.defense = False

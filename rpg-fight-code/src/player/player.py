@@ -3,6 +3,10 @@ class Player:
         Player.hp = 100
         Player.max_hp = 100
 
+        Player.damage = 10
+        Player.fireball_damage = 25
+        Player.defense = False
+
         Player.xp = 0
         Player.level = 1
         Player.xp_needed = 10
