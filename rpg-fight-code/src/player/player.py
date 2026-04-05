@@ -3,7 +3,7 @@ class Player:
         Player.hp = 100
         Player.max_hp = 100
         Player.heal_cooldown = 0
-        Player.heal_random = 0
+        Player.fix_heal = 0
 
         Player.damage = 10
         Player.fireball_damage = 25

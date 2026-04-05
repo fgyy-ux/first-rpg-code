@@ -14,19 +14,11 @@ def health_bar(hp, total = 100, chars = ("#", "-"), bar_length = 20):
     empty_bar = chars[1] * empty_length
     return f"[{filled_bar}{empty_bar}]"
 
-#player.hp = 100
-#enemy_hp = 100
+
 turn = 1
-#counter_chance = 70
-#player_defense = False
-#enemy_defense = False
-#enemy.crit_attack = False
 heal_cooldown = 0
 fireball_cooldown = 0
-#player_damage = 10
-#fireball_damage = 25
 heal_random = 0
-#enemy_damage_random = 0
 
 #player turn
 while player.hp > 0 and enemy.hp > 0:
