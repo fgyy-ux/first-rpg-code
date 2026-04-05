@@ -1,9 +1,11 @@
+import random
 class Player:
     def __init__(self):
         Player.hp = 100
         Player.max_hp = 100
         Player.heal_cooldown = 0
         Player.fix_heal = 0
+        Player.heal = random.randint (15, 20)
 
         Player.damage = 10
         Player.fireball_damage = 25

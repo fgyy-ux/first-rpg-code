@@ -16,9 +16,6 @@ def health_bar(hp, total = 100, chars = ("#", "-"), bar_length = 20):
 
 
 turn = 1
-heal_cooldown = 0
-fireball_cooldown = 0
-heal_random = 0
 
 #player turn
 while player.hp > 0 and enemy.hp > 0:
@@ -30,12 +27,12 @@ while player.hp > 0 and enemy.hp > 0:
         enemy.hp -= player.damage
         print (f'Enemy Got HIT by {player.damage} HP!')
     elif move == "2":
-        if fireball_cooldown > 0:
+        if player.fireball_cooldown > 0:
             print('Fireball is on Cooldown!')
         else:
             enemy.hp -= player.fireball_damage
             print(f'Enemy Got HIT by {player.fireball_damage} HP!')
-            fireball_cooldown = 2
+            player.fireball_cooldown = 2
             crit_chance = 0.15
             if random.random() < crit_chance:
                 print(f'Critical HIT {player.fireball_damage} Damage!')
@@ -43,14 +40,13 @@ while player.hp > 0 and enemy.hp > 0:
     elif move == "3":           
             player.defense = True
     elif move == "4":
-        if heal_cooldown > 0:
+        if player.heal_cooldown > 0:
             print('Healing is on Cooldown!')
         else:
-            heal = random.randint (15, 20)
-            heal += heal_random
-            player.hp = min(player.max_hp, player.hp + heal) 
-            print(f'You heal for {heal} HP!')
-            heal_cooldown = 2
+            player.heal += player.fix_heal
+            player.hp = min(player.max_hp, player.hp + player.heal) 
+            print(f'You heal for {player.heal} HP!')
+            player.heal_cooldown = 2
     else:
      print ('You missed')
     if enemy.hp <= 0:
@@ -72,7 +68,7 @@ while player.hp > 0 and enemy.hp > 0:
     if player.defense == True:
         enemy.damage /= 2
         enemy.damage = round (enemy.damage)
-        print('You defended yourself')  
+        print('You defended yourself')
         player.defense = False
     if enemy.crit_attack == False:
         player.hp -= enemy.damage
@@ -85,12 +81,13 @@ while player.hp > 0 and enemy.hp > 0:
             #double damage on critical hit
                  #enemy turn ends
     #print turn number 
-    if fireball_cooldown > 0:
-        fireball_cooldown -= 1
-    if heal_cooldown > 0:
-        heal_cooldown -= 1
+    if player.fireball_cooldown > 0:
+        player.fireball_cooldown -= 1
+    if player.heal_cooldown > 0:
+        player.heal_cooldown -= 1
     print()
     turn += 1
+    enemy.damage = random.randint (10, 15)
 
 #determine winner    
 if player.hp <= 0:
